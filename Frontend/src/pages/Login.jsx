@@ -12,10 +12,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://mern-stack-phonk-app.onrender.com/api/v1/users/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+  "https://mern-stack-phonk-app.onrender.com/api/v1/users/login",
+  { email, password },
+  { withCredentials: true }
+);
 
       const token = res.data.token;
       const isAdmin = res.data.isAdmin;
