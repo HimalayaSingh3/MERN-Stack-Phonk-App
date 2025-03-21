@@ -7,7 +7,7 @@ const Products = () => {
   useEffect(() => {
     const fetchPhonks = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/admin/get-phonks");
+        const response = await axios.get("https://mern-stack-phonk-app.onrender.com/api/v1/admin/get-phonks");
         setPhonks(response.data.data);
       } catch (error) {
         console.error("Error fetching phonks:", error);
