@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { auth } = require("../middleware/Auth");
 
 // Sign-up route
-router.post("/register",async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -14,16 +14,22 @@ router.post("/register",async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
     if (username.length < 5) {
-      return res.status(400).json({ message: "Username must have at least 5 characters" });
+      return res
+        .status(400)
+        .json({ message: "Username must have at least 5 characters" });
     }
     if (password.length < 8) {
-      return res.status(400).json({ message: "Password must have at least 8 characters" });
+      return res
+        .status(400)
+        .json({ message: "Password must have at least 8 characters" });
     }
 
     // Check if user exists (either by email or username)
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "Username or Email already exists" });
+      return res
+        .status(400)
+        .json({ message: "Username or Email already exists" });
     }
 
     // Hash the password
@@ -36,7 +42,9 @@ router.post("/register",async (req, res) => {
     return res.status(201).json({ message: "Account created successfully" });
   } catch (error) {
     console.error("Sign-Up Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 
@@ -63,7 +71,11 @@ router.post("/login", async (req, res) => {
 
     // Generate JWT Token
     const token = jwt.sign(
-      { id: existingUser.id, email: existingUser.email, isAdmin: existingUser.isAdmin },
+      {
+        id: existingUser.id,
+        email: existingUser.email,
+        isAdmin: existingUser.isAdmin,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );
@@ -85,10 +97,11 @@ router.post("/login", async (req, res) => {
     });
   } catch (error) {
     console.error("Sign-In Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
-
 
 // Logout route
 router.post("/logout", (req, res) => {
@@ -97,7 +110,9 @@ router.post("/logout", (req, res) => {
     return res.status(200).json({ message: "Logged Out Successfully" });
   } catch (error) {
     console.error("Logout Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 
@@ -108,7 +123,9 @@ router.get("/check-cookie", (req, res) => {
     return res.status(200).json({ message: !!token });
   } catch (error) {
     console.error("Check Cookie Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 
@@ -125,7 +142,9 @@ router.get("/user-details", auth, async (req, res) => {
     return res.status(200).json({ user: existingUser });
   } catch (error) {
     console.log("User Details Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 

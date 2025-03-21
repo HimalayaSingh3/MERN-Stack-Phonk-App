@@ -9,7 +9,7 @@ const Button = () => {
     try {
       const res = await axios.post("http://localhost:3000/api/v1/users/logout");
       console.log("LoggedOut Successfully", res);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error("error:", error);
     }

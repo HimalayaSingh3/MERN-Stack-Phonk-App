@@ -12,7 +12,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import Button from "../Button";
 
 function Admin() {
   const [phonks, setPhonks] = useState([]);
@@ -42,7 +41,7 @@ function Admin() {
     const { name, type, files, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "file" ? (files.length > 0 ? files[0] : null) : value,
+      [name]: type === "file" ? files[0] || null : value,
     }));
   };
 
@@ -173,7 +172,7 @@ function Admin() {
               className="h-full text-center bg-white w-full sm:w-68 p-6 flex flex-col items-center shadow-xl"
             >
               <img
-                src={`http://localhost:3000/${item.frontImage}`}
+                src={item.frontImage} // ✅ Use Cloudinary URL directly
                 alt={item.title}
                 className="w-48 object-cover rounded-lg"
                 onError={(e) => (e.target.src = "fallback-image-url.jpg")}
@@ -182,7 +181,7 @@ function Admin() {
               <p className="text-xs mt-2 text-gray-600">{item.artist}</p>
               <audio controls className="mt-2 w-full">
                 <source
-                  src={`http://localhost:3000/${item.audioFile}`}
+                  src={item.audioFile} // ✅ Use Cloudinary URL directly
                   type="audio/mpeg"
                 />
                 Your browser does not support the audio element.

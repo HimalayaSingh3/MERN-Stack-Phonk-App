@@ -24,9 +24,7 @@ const Navbar = () => {
           <Link to="/products" className="hover:text-black">
             All Products
           </Link>
-          <Link to="/admin" className="hover:text-black">
-            Admin
-          </Link>
+          
         </nav>
 
         <div className="hidden md:flex gap-2">

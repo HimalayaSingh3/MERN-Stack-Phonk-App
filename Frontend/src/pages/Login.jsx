@@ -1,34 +1,31 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "@/AuthContext";
 
 const Login = () => {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post("http://localhost:3000/api/v1/users/login", { email, password });
+      const res = await axios.post("http://localhost:3000/api/v1/users/login", {
+        email,
+        password,
+      });
 
-        // Store the token instead of the entire user object
-        localStorage.setItem("token", res.data.token);
+      const token = res.data.token;
+      const isAdmin = res.data.isAdmin;
 
-        if (res.data.isAdmin) {
-            console.log("Admin logged in!");
-            navigate("/admin");
-        } else {
-            console.log("User logged in!");
-            navigate("/home");
-        }
+      login({ token, isAdmin });
     } catch (error) {
-        setError("Invalid email or password");
-        console.error("Login error:", error);
+      setError("Invalid email or password");
+      console.error("Login error:", error);
     }
-};
-
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -36,7 +33,8 @@ const Login = () => {
         <h1 className="text-3xl font-bold">Login</h1>
         <form className="flex flex-col w-full mt-4" onSubmit={handleSubmit}>
           {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-          <h4>Email</h4>
+
+          <label className="font-semibold">Email</label>
           <input
             type="text"
             placeholder="Enter your email..."
@@ -45,7 +43,8 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <h4 className="mt-4">Password</h4>
+
+          <label className="font-semibold mt-4">Password</label>
           <input
             type="text"
             placeholder="Enter your password..."
@@ -54,12 +53,14 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <button
             type="submit"
             className="cursor-pointer mt-4 p-2 rounded bg-blue-500 font-semibold text-white"
           >
             Login
           </button>
+
           <p className="mt-2 text-sm text-center">
             Don't have an account?{" "}
             <Link to="/register" className="underline text-blue-500">

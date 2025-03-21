@@ -25,16 +25,7 @@ const Profile = () => {
               <CircleUserRound size={100} />
               <Button />
             </div>
-              <div className="space-y-2">
-                <p>
-                  <strong>Email:</strong> himalayasingh337@gmail.com
-                </p>
-                <p>
-                  <strong>Username:</strong> Himalaya337
-                </p>
-              </div>
-              
-            </div>
+          </div>
         ) : (
           <p>Loading user details...</p>
         )}

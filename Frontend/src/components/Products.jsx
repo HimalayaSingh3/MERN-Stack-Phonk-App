@@ -7,9 +7,7 @@ const Products = () => {
   useEffect(() => {
     const fetchPhonks = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/v1/admin/get-phonks"
-        );
+        const response = await axios.get("http://localhost:3000/api/v1/admin/get-phonks");
         setPhonks(response.data.data);
       } catch (error) {
         console.error("Error fetching phonks:", error);
@@ -24,30 +22,21 @@ const Products = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl w-full">
         {phonks.length > 0 ? (
           phonks.map((item) => (
-            <div
-              key={item._id}
-              className="rounded-lg text-center bg-gray-800 w-full p-6 shadow-xl"
-            >
+            <div key={item._id} className="rounded-lg text-center bg-gray-800 w-full p-6 shadow-xl">
               <div className="w-full flex justify-between items-center bg-white p-6 rounded">
                 <img
-                  src={`http://localhost:3000/${item.frontImage}`}
+                  src={item.frontImage} // ✅ Use Cloudinary URL directly
                   alt={item.title}
-                  className="h-20 object-fit rounded-lg"
-                  onError={(e) => (e.target.src = "fallback-image-url.jpg")}
+                  className="h-20 object-cover rounded-lg"
+                  onError={(e) => (e.target.src = "/fallback.jpg")} // ✅ Provide fallback image
                 />
                 <div>
                   <h1 className="text-lg mt-2 font-semibold">{item.title}</h1>
                   <p className="text-xs mt-2 text-gray-600">{item.artist}</p>
                 </div>
               </div>
-              <audio
-                controls
-                className="mt-2 w-full rounded bg-gray-100 p-2 shadow-md"
-              >
-                <source
-                  src={`http://localhost:3000/${item.audioFile}`}
-                  type="audio/mpeg"
-                />
+              <audio controls className="mt-2 w-full rounded bg-gray-100 p-2 shadow-md">
+                <source src={item.audioFile} type="audio/mpeg" /> {/* ✅ Use Cloudinary URL */}
                 Your browser does not support the audio element.
               </audio>
             </div>

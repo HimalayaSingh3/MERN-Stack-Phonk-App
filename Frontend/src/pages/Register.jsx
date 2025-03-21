@@ -19,13 +19,15 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/v1/users/register", values);
+      const res = await axios.post(
+        "http://localhost:3000/api/v1/users/register",
+        values
+      );
 
-      // Store the token in localStorage
       localStorage.setItem("token", res.data.token);
 
       console.log("User registered successfully!");
-      navigate("/"); // Redirect to home after registration
+      navigate("/");
     } catch (error) {
       setError(error.response?.data?.message || "Something went wrong");
       console.error("Registration error:", error);
@@ -37,7 +39,11 @@ const Register = () => {
       <div className="border shadow-lg rounded-xl h-auto w-96 flex flex-col justify-center items-center p-6">
         <h1 className="text-3xl font-bold">Register</h1>
         <form className="flex flex-col w-full mt-4" onSubmit={handleSubmit}>
-          {error && <p className="text-red-500 text-sm mb-2" aria-live="assertive">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm mb-2" aria-live="assertive">
+              {error}
+            </p>
+          )}
           <h4>Username</h4>
           <input
             type="text"
@@ -77,7 +83,7 @@ const Register = () => {
           </button>
           <p className="mt-2 text-sm text-center">
             Already have an account?{" "}
-            <Link to="/" className="underline text-blue-500">
+            <Link to="/login" className="underline text-blue-500">
               Sign in
             </Link>
           </p>
