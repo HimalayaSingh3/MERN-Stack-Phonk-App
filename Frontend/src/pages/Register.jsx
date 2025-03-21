@@ -20,9 +20,11 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://mern-stack-phonk-app.onrender.com/api/v1/users/register",
-        values
-      );
+  "https://mern-stack-phonk-app.onrender.com/api/v1/users/register",
+  values,
+  { withCredentials: true } 
+);
+
 
       localStorage.setItem("token", res.data.token);
 
