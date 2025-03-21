@@ -81,12 +81,13 @@ router.post("/login", async (req, res) => {
     );
 
     // Set cookie
-    res.cookie("phonkUserToken", token, {
-      httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-    });
+res.cookie("phonkUserToken", token, {
+  httpOnly: true,
+  maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+  secure: true, // Must be true in production (HTTPS required)
+  sameSite: "None", // Important for cross-site cookies
+});
+
 
     return res.status(200).json({
       id: existingUser.id,
