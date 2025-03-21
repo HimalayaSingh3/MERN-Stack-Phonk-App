@@ -20,7 +20,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/users/register",
+        "https://mern-stack-phonk-app.onrender.com/api/v1/users/register",
         values
       );
 
