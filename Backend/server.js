@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "https://phonk-app.vercel.app"
+      "https://phonk-app.vercel.app",
       "http://localhost:5173",
       "https://phonk-app.vercel.app",
       "https://phonk-app-git-main-himalayasingh3s-projects.vercel.app"
