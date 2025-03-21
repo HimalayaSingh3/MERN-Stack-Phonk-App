@@ -22,9 +22,6 @@ const Home = () => {
             Listen to the most popular phonks on just one platform -{" "}
             <span className="font-bold">PHONKMASTER</span>
           </p>
-          <button className="cursor-pointer font-semibold mt-5 w-44 sm:w-52 text-sm bg-purple-700 rounded-full py-3 px-4 text-white self-center md:self-start hover:bg-purple-800">
-            Login to Create
-          </button>
         </div>
       </div>
     </div>
