@@ -53,13 +53,6 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            to="/categories"
-            className="hover:text-green-600"
-            onClick={() => setMenuOpen(false)}
-          >
-            Categories
-          </Link>
-          <Link
             to="/products"
             className="hover:text-green-600"
             onClick={() => setMenuOpen(false)}
