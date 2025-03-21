@@ -26,7 +26,7 @@ function Admin() {
     const fetchPhonks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/v1/admin/get-phonks"
+          "https://mern-stack-phonk-app.onrender.com/api/v1/admin/get-phonks"
         );
         setPhonks(response.data.data);
       } catch (error) {
@@ -59,7 +59,7 @@ function Admin() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/admin/add-phonk",
+        "https://mern-stack-phonk-app.onrender.com/api/v1/admin/add-phonk",
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -76,7 +76,7 @@ function Admin() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:3000/api/v1/admin/delete-phonk/${id}`
+        `https://mern-stack-phonk-app.onrender.com/api/v1/admin/delete-phonk/${id}`
       );
       setPhonks(phonks.filter((phonk) => phonk._id !== id)); // Remove from UI
     } catch (error) {
