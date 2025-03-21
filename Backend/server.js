@@ -19,10 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://mern-stack-phonk-app.onrender.com",
+    origin: ["http://localhost:5173", "https://mern-stack-phonk-app.onrender.com"],
     credentials: true,
   })
 );
+
 app.use(fileUpload({ useTempFiles: true }));
 
 const PORT = process.env.PORT || 5000;
