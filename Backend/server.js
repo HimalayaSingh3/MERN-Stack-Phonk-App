@@ -17,14 +17,24 @@ Db();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://mern-stack-phonk-app.onrender.com"],
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
-    credentials: true,
+    origin: [
+      "https://phonk-app.vercel.app"
+      "http://localhost:5173",
+      "https://phonk-app.vercel.app",
+      "https://phonk-app-git-main-himalayasingh3s-projects.vercel.app"
+    ],
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // Important for sending cookies
   })
 );
+
+// Handle preflight requests
+app.options("*", cors());
+
 app.options("*", cors());
 
 
